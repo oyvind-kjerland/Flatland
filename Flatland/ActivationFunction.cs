@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace Flatland
 {
-    class BinaryToANNWeightsDeveloper
+    abstract class ActivationFunction
     {
+        abstract public double Activate(double input);
     }
 }

@@ -6,7 +6,11 @@ using System.Threading.Tasks;
 
 namespace Flatland
 {
-    class BinaryToANNWeightsDeveloper
+    class IdentityActivation : ActivationFunction
     {
+        public override double Activate(double input)
+        {
+            return input;
+        }
     }
 }
