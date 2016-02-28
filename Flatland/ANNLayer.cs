@@ -9,7 +9,7 @@ namespace Flatland
     class ANNLayer
     {
 
-        // 2D array of weights where each row are the output weights of one node
+        // 2D array of weights where each row are the output weights of one node to all the other nodes of the next layer
         public double[,] Weights { get; set; }
 
         // activation function as sigmoid, tangent, etc
@@ -23,16 +23,13 @@ namespace Flatland
 
         public ANNLayer(int numNodes, int numOutputs)
         {
-
             this.numNodes = numNodes;
             this.numOutputs = numOutputs;
 
+            
             Weights = new double[numNodes, numOutputs];
 
             output = new double[numOutputs];
-
-            
-
         }
 
         public void Calculate(double[] input)
@@ -51,9 +48,9 @@ namespace Flatland
                 for (int j=0; j<numOutputs; j++)
                 {
                     output[j] += Weights[i, j] * activation;
+
                 }
-            }
-               
+            }   
         }
     }
 }
