@@ -98,6 +98,7 @@
     <Compile Include="SimulationForm.Designer.cs">
       <DependentUpon>SimulationForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Utility.cs" />
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
