@@ -64,20 +64,20 @@ namespace Flatland
         /// <param name="dir">Direction player is facing</param>
         /// <param name="previosPosition">previous position</param>
         /// <returns></returns>
-        public Tuple<int, int> GetNextPosition(Player.FacingDirection dir, Tuple<int, int> previosPosition)
+        public Tuple<int, int> GetNextPosition(FacingDirection dir, Tuple<int, int> previosPosition)
         {
             int rows = board.GetLength(0);
             int cols = board.GetLength(1);
 
             switch (dir)
             {
-                case Player.FacingDirection.NORTH:
+                case FacingDirection.NORTH:
                     return new Tuple<int, int>( Utility.Mod(previosPosition.Item1 - 1, rows), previosPosition.Item2);
-                case Player.FacingDirection.EAST:
+                case FacingDirection.EAST:
                     return new Tuple<int, int>(previosPosition.Item1, Utility.Mod(previosPosition.Item2 + 1, cols));
-                case Player.FacingDirection.WEST:
+                case FacingDirection.WEST:
                     return new Tuple<int, int>(previosPosition.Item1, Utility.Mod(previosPosition.Item2 - 1, cols));
-                case Player.FacingDirection.SOUTH:
+                case FacingDirection.SOUTH:
                     return new Tuple<int, int>( Utility.Mod(previosPosition.Item1 + 1, rows), previosPosition.Item2);
                 default:
                     return null;

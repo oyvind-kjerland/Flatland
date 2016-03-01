@@ -14,7 +14,6 @@ namespace Flatland
         [STAThread]
         static void Main()
         {
-            
             Board b = new Board(new float[] { 0.33f, 0.33f }, new int[] { 10, 10 });
 
             Application.EnableVisualStyles();

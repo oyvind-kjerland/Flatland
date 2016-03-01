@@ -7,11 +7,12 @@ using System.Threading.Tasks;
 
 namespace Flatland
 {
+    public enum FacingDirection { NORTH, EAST, WEST, SOUTH}
+    public enum MovementDirection { FORWARD, LEFT, RIGHT}
+
     public class Player
     {
 
-        public enum FacingDirection { NORTH, EAST, WEST, SOUTH}
-        public enum MovementDirection { FORWARD, LEFT, RIGHT}
 
         public FacingDirection facingDirection = FacingDirection.SOUTH;
         public Board.State[] sensors = new Board.State[3];
@@ -24,6 +25,7 @@ namespace Flatland
         {
             this.board = board;
             this.position = position;
+            UpdateSensors(position);
         }
 
         /// <summary>
@@ -51,6 +53,33 @@ namespace Flatland
             board.board[position.Item1, position.Item2] = Board.State.Player;
 
             UpdateSensors(position);
+        }
+
+        private void UpdateSensors(Tuple<int, int> position)
+        {
+            // Forward
+            FacingDirection forwardDirection = GetNewDirection(MovementDirection.FORWARD, facingDirection);
+            sensors[0] = board.GetStateOfPosition(board.GetNextPosition(forwardDirection, position));
+            // Right
+            FacingDirection rightDirection = GetNewDirection(MovementDirection.RIGHT, facingDirection);
+            sensors[1] = board.GetStateOfPosition(board.GetNextPosition(rightDirection, position));
+            // Left
+            FacingDirection leftDirection = GetNewDirection(MovementDirection.LEFT, facingDirection);
+            sensors[2] = board.GetStateOfPosition(board.GetNextPosition(leftDirection, position));
+        }
+
+        private void ConsumeItem(Tuple<int,int> position)
+        {
+            // Update scores.
+            switch (board.board[position.Item1, position.Item2])
+            {
+                case Board.State.Food:
+                    foodScore++;
+                    break;
+                case Board.State.Poison:
+                    poisonScore++;
+                    break;
+            }
         }
 
         private FacingDirection GetNewDirection(MovementDirection dir, FacingDirection facingDirection)
@@ -119,33 +148,6 @@ namespace Flatland
             }
 
             return FacingDirection.NORTH;
-        }
-
-        private void UpdateSensors(Tuple<int, int> position)
-        {
-            // Forward
-            FacingDirection forwardDirection = GetNewDirection(MovementDirection.FORWARD, facingDirection);
-            sensors[0] = board.GetStateOfPosition(board.GetNextPosition(forwardDirection, position));
-            // Right
-            FacingDirection rightDirection = GetNewDirection(MovementDirection.RIGHT, facingDirection);
-            sensors[1] = board.GetStateOfPosition(board.GetNextPosition(rightDirection, position));
-            // Left
-            FacingDirection leftDirection = GetNewDirection(MovementDirection.LEFT, facingDirection);
-            sensors[2] = board.GetStateOfPosition(board.GetNextPosition(leftDirection, position));
-        }
-
-        private void ConsumeItem(Tuple<int,int> position)
-        {
-            // Update scores.
-            switch (board.board[position.Item1, position.Item2])
-            {
-                case Board.State.Food:
-                    foodScore++;
-                    break;
-                case Board.State.Poison:
-                    poisonScore++;
-                    break;
-            }
         }
 
         internal RotateFlipType GetRotationFlipType()
