@@ -14,9 +14,11 @@ namespace Flatland
         [STAThread]
         static void Main()
         {
+            Board b = new Board(new float[] { 0.33f, 0.33f }, new int[] { 10, 10 });
+
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Form1());
+            Application.Run(new SimulationForm(b));
         }
     }
 }
