@@ -51,7 +51,7 @@ namespace Flatland
         }
 
 
-        public double [] Run(double[] input)
+        public double[] Run(double[] input)
         {
             foreach (ANNLayer layer in layerList)
             {

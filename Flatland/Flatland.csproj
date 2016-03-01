@@ -53,9 +53,11 @@
     <Compile Include="ANN\ANN.cs" />
     <Compile Include="ANN\ANNLayer.cs" />
     <Compile Include="BinaryToANNWeightsDeveloper.cs" />
+    <Compile Include="EA\DomainSpecific\ANNWeightPhenotype.cs" />
     <Compile Include="EA\DomainSpecific\BinaryGeneticOperator.cs" />
     <Compile Include="EA\DomainSpecific\BinaryGenotype.cs" />
     <Compile Include="EA\DomainSpecific\BinaryPhenotype.cs" />
+    <Compile Include="EA\DomainSpecific\BinaryToANNWeightsDeveloper.cs" />
     <Compile Include="EA\DomainSpecific\BinaryToBinaryDeveloper.cs" />
     <Compile Include="EA\DomainSpecific\BinaryToSymbolDeveloper.cs" />
     <Compile Include="EA\DomainSpecific\FitnessProportionate.cs" />
