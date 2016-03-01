@@ -6,10 +6,9 @@ using System.Threading.Tasks;
 
 namespace Flatland
 {
-    class BinaryToANNWeightsDeveloper
+    abstract class Genotype
     {
-
-
-
+        abstract public Genotype Clone();
+        abstract public void Randomize(Random random);
     }
 }

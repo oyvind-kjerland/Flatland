@@ -6,10 +6,8 @@ using System.Threading.Tasks;
 
 namespace Flatland
 {
-    class BinaryToANNWeightsDeveloper
+    abstract class Phenotype
     {
-
-
-
+        abstract public string GetPhenotypeString();
     }
 }

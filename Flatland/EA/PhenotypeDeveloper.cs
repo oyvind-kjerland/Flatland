@@ -4,12 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Flatland
+namespace Flatland.EA
 {
-    class BinaryToANNWeightsDeveloper
+    abstract class PhenotypeDeveloper
     {
-
-
-
+        abstract public Phenotype Develop(Genotype genotype);
     }
 }
