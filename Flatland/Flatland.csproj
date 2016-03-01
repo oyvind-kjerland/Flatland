@@ -48,12 +48,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Board.cs" />
-    <Compile Include="EA\AdultSelector.cs" />
     <Compile Include="ANN\ActivationFunction.cs" />
     <Compile Include="ANN\ANN.cs" />
     <Compile Include="ANN\ANNLayer.cs" />
+    <Compile Include="ANN\IdentityActivation.cs" />
+    <Compile Include="ANN\SigmoidActivation.cs" />
     <Compile Include="BinaryToANNWeightsDeveloper.cs" />
+    <Compile Include="Board.cs" />
+    <Compile Include="EA\AdultSelector.cs" />
     <Compile Include="EA\DomainSpecific\ANNWeightPhenotype.cs" />
     <Compile Include="EA\DomainSpecific\BinaryGeneticOperator.cs" />
     <Compile Include="EA\DomainSpecific\BinaryGenotype.cs" />
@@ -62,6 +64,7 @@
     <Compile Include="EA\DomainSpecific\BinaryToBinaryDeveloper.cs" />
     <Compile Include="EA\DomainSpecific\BinaryToSymbolDeveloper.cs" />
     <Compile Include="EA\DomainSpecific\FitnessProportionate.cs" />
+    <Compile Include="EA\DomainSpecific\FlatlandFitnessEvaluator.cs" />
     <Compile Include="EA\DomainSpecific\FullSelector.cs" />
     <Compile Include="EA\DomainSpecific\GlobalParentSelector.cs" />
     <Compile Include="EA\DomainSpecific\LOLZEvaluator.cs" />
@@ -75,33 +78,27 @@
     <Compile Include="EA\DomainSpecific\TournamentSelector.cs" />
     <Compile Include="EA\EALoop.cs" />
     <Compile Include="EA\FitnessEvaluator.cs" />
-    <Compile Include="Form1.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
-    </Compile>
-    <Compile Include="ANN\IdentityActivation.cs" />
     <Compile Include="EA\GeneticOperator.cs" />
     <Compile Include="EA\Genotype.cs" />
     <Compile Include="EA\Individual.cs" />
     <Compile Include="EA\ParentSelector.cs" />
     <Compile Include="EA\Phenotype.cs" />
     <Compile Include="EA\PhenotypeDeveloper.cs" />
+    <Compile Include="Form1.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form1.Designer.cs">
+      <DependentUpon>Form1.cs</DependentUpon>
+    </Compile>
     <Compile Include="Player.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ANN\SigmoidActivation.cs" />
     <Compile Include="SimulationForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="SimulationForm.Designer.cs">
-      <DependentUpon>SimulationForm.cs</DependentUpon>
-    </Compile>
+    <Compile Include="SimulationForm.Designer.cs" />
     <Compile Include="Utility.cs" />
-    <EmbeddedResource Include="Form1.resx">
-      <DependentUpon>Form1.cs</DependentUpon>
-    </EmbeddedResource>
+    <EmbeddedResource Include="Form1.resx" />
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -111,9 +108,7 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <EmbeddedResource Include="SimulationForm.resx">
-      <DependentUpon>SimulationForm.cs</DependentUpon>
-    </EmbeddedResource>
+    <EmbeddedResource Include="SimulationForm.resx" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -126,6 +121,11 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Resources\player.png" />
+    <Content Include="Resources\poison.png" />
+    <Content Include="Resources\rice.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

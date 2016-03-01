@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Flatland
 {
-    abstract class ActivationFunction
+    public abstract class ActivationFunction
     {
         abstract public double Activate(double input);
     }

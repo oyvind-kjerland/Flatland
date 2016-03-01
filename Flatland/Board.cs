@@ -12,7 +12,8 @@ namespace Flatland
 
         public enum State { Free, Food, Poison, Player }
 
-        public State[,] board { get; }
+        public State[,] board { get; set; }
+        public State[,] initialBoard { get; }
         public Player player;
 
 
@@ -33,8 +34,16 @@ namespace Flatland
                 }
             }
 
+            initialBoard = (State[,])board.Clone();
+
             InitializeBoard(FPD);
             PlaceRandomPlayer();
+        }
+
+        public void ResetBoard()
+        {
+            board = initialBoard;
+            player.ResetPlayer();
         }
 
         private void InitializeBoard(float[] FPD)

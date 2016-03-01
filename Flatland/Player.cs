@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 namespace Flatland
 {
     public enum FacingDirection { NORTH, EAST, WEST, SOUTH}
-    public enum MovementDirection { FORWARD, LEFT, RIGHT}
+    public enum MovementDirection { FORWARD, LEFT, RIGHT, NONE}
 
     public class Player
     {
@@ -17,15 +17,27 @@ namespace Flatland
         public FacingDirection facingDirection = FacingDirection.SOUTH;
         public Board.State[] sensors = new Board.State[3];
         public Tuple<int, int> position;
+        public Tuple<int, int> initialPosition;
+
         public Board board;
         public int foodScore { get; set; }
         public int poisonScore { get; set; }
+        public ANN ann { get; set; }
+        public double threshold { get; set; }
 
         public Player(Board board, Tuple<int, int> position)
         {
             this.board = board;
             this.position = position;
+            initialPosition = position;
             UpdateSensors(position);
+        }
+
+        public void ResetPlayer()
+        {
+            this.foodScore = 0;
+            this.poisonScore = 0;
+            this.position = initialPosition;
         }
 
         /// <summary>
@@ -79,6 +91,51 @@ namespace Flatland
                 case Board.State.Poison:
                     poisonScore++;
                     break;
+            }
+        }
+
+        public MovementDirection GetMove()
+        {
+            double[] annInputs = new double[6];
+
+            for (int i = 0; i < sensors.Length; i++)
+            {
+                if (sensors[i] == Board.State.Food)
+                    annInputs[i] = 1;
+                else if (sensors[i] == Board.State.Poison)
+                    annInputs[i + 3] = 1;
+            }
+
+            double[] res = ann.Run(annInputs);
+
+            return GetBestMoveFromArray(res);
+        }
+
+        private MovementDirection GetBestMoveFromArray(double[] moves)
+        {
+            double bestValue = moves[0];
+            int bestIndex = 0;
+
+            // Find highest value and index
+            for (int i = 1; i < moves.Length; i++)
+            {
+                if (moves[i] > bestValue)
+                    bestIndex = i;
+            }
+
+            if (bestValue < threshold)
+                return MovementDirection.NONE;
+
+            switch (bestIndex)
+            {
+                case 0:
+                    return MovementDirection.FORWARD;
+                case 1:
+                    return MovementDirection.RIGHT;
+                case 2:
+                    return MovementDirection.LEFT;
+                default:
+                    return MovementDirection.NONE;
             }
         }
 
