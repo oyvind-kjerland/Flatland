@@ -53,7 +53,6 @@
     <Compile Include="ANN\ActivationFunction.cs" />
     <Compile Include="ANN\ANN.cs" />
     <Compile Include="ANN\ANNLayer.cs" />
-    <Compile Include="BinaryToANNWeightsDeveloper.cs" />
     <Compile Include="EA\DomainSpecific\ANNWeightPhenotype.cs" />
     <Compile Include="EA\DomainSpecific\BinaryGeneticOperator.cs" />
     <Compile Include="EA\DomainSpecific\BinaryGenotype.cs" />
@@ -87,7 +86,7 @@
     <Compile Include="EA\Individual.cs" />
     <Compile Include="EA\ParentSelector.cs" />
     <Compile Include="EA\Phenotype.cs" />
-    <Compile Include="EA\PhenotypeDeveloper.cs" />
+    <Compile Include="obj\PhenotypeDeveloper.cs" />
     <Compile Include="Player.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -126,6 +125,11 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Resources\player.png" />
+    <Content Include="Resources\poison.png" />
+    <Content Include="Resources\rice.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

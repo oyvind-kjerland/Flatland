@@ -89,12 +89,25 @@ namespace Flatland
 
                 ANN ann = new ANN(numSensorNodes, numMotorNodes, numHiddenLayers, numNodesPerLayer, activationFunction);
 
+                int numWeights = ann.GetNumberOfWeights();
+
+                // Setup child population
+                int childCount = (int)numericChildCount.Value;
+                eaLoop.ChildCount = childCount;
+
+                // Setup genotype (TODO Remove hardcoding)
+                int numBits = 8 * numWeights;
+                eaLoop.Genotype = new BinaryGenotype(numBits);
+
+                // Setup phenotype developer
+                BinaryToANNWeightsDeveloper developer = new BinaryToANNWeightsDeveloper();
+                developer.NumBitsPerWeight = numBits;
+                developer.NumWeights = numWeights;
+                eaLoop.PhenotypeDeveloper = developer;
 
 
-
-
-
-
+                // Setup fitness evaluator
+                FLatlandEvaluator.ANN = ann;
 
 
             }
