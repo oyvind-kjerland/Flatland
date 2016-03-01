@@ -4,12 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Flatland
+namespace Flatland.EA
 {
-    class BinaryToANNWeightsDeveloper
+    abstract class FitnessEvaluator
     {
-
-
-
+        abstract public float Evaluate(Individual individual);
     }
 }
