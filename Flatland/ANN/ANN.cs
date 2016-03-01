@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Flatland
 {
-    class ANN
+    public class ANN
     {
 
         private List<ANNLayer> layerList;

@@ -9,5 +9,9 @@ namespace Flatland.EA
     abstract class FitnessEvaluator
     {
         abstract public float Evaluate(Individual individual);
+        public virtual void NextGeneration()
+        {
+
+        }
     }
 }
