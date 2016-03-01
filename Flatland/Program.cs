@@ -18,7 +18,8 @@ namespace Flatland
 
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new SimulationForm(b));
+            //Application.Run(new SimulationForm(b));
+            Application.Run(new Form1());
         }
     }
 }

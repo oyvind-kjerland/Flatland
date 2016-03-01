@@ -96,18 +96,19 @@ namespace Flatland
                 eaLoop.ChildCount = childCount;
 
                 // Setup genotype (TODO Remove hardcoding)
-                int numBits = 8 * numWeights;
+                int numBitsPerWeight = 8;
+                int numBits = numBitsPerWeight * numWeights;
                 eaLoop.Genotype = new BinaryGenotype(numBits);
 
                 // Setup phenotype developer
                 BinaryToANNWeightsDeveloper developer = new BinaryToANNWeightsDeveloper();
-                developer.NumBitsPerWeight = numBits;
+                developer.NumBitsPerWeight = numBitsPerWeight;
                 developer.NumWeights = numWeights;
                 eaLoop.PhenotypeDeveloper = developer;
 
 
                 // Setup fitness evaluator
-                FLatlandEvaluator.ANN = ann;
+                //FLatlandEvaluator.ANN = ann;
 
 
             }

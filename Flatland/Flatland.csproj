@@ -86,7 +86,7 @@
     <Compile Include="EA\Individual.cs" />
     <Compile Include="EA\ParentSelector.cs" />
     <Compile Include="EA\Phenotype.cs" />
-    <Compile Include="obj\PhenotypeDeveloper.cs" />
+    <Compile Include="EA\PhenotypeDeveloper.cs" />
     <Compile Include="Player.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -130,6 +130,9 @@
     <Content Include="Resources\player.png" />
     <Content Include="Resources\poison.png" />
     <Content Include="Resources\rice.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="obj\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

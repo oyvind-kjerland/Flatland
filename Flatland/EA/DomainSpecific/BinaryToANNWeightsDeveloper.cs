@@ -18,16 +18,19 @@ namespace Flatland.EA.DomainSpecific
 
             ANNWeightPhenotype annWeightPhenotype = new ANNWeightPhenotype();
 
-            double max = Math.Pow(2, numBitsPerWeight);
+            double max = Math.Pow(2, NumBitsPerWeight);
 
-            double[] weights = new double[numWeights];
+            double[] weights = new double[NumWeights];
             int weight = 0;
             int weightIndex = 0;
 
             for (int i=0; i<binaryGenotype.BitVector.Length; i++)
             {
-                weight += binaryGenotype.BitVector[i] << (i % numBitsPerWeight);
-                if (i % numBitsPerWeight == numBitsPerWeight - 1)
+
+                // Convert bits to an int
+                weight += binaryGenotype.BitVector[i] << (i % NumBitsPerWeight);
+
+                if (i % NumBitsPerWeight == NumBitsPerWeight - 1)
                 {
                     // Calculating a weight between 0 and 1
                     weights[weightIndex] = (double)weight / max;
