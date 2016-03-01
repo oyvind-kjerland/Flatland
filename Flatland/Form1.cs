@@ -34,9 +34,7 @@ namespace Flatland
         private string currentSdString;
 
         // Problem constants
-        private const int ONEMAX_INDEX = 0;
-        private const int LOLZ_INDEX = 1;
-        private const int SURPRISING_INDEX = 2;
+        private const int ANN_INDEX = 0;
 
         // Adult selection constants
         private const int FULL_INDEX = 0;
@@ -65,109 +63,39 @@ namespace Flatland
             comboBoxAdultSelector.SelectedIndex = 0;
             comboBoxParentSelector.SelectedIndex = 0;
 
+
         }
 
 
         private void SetupProblem()
         {
-
-            int childCount = (int)numericChildCount.Value;
-            eaLoop.ChildCount = childCount;
-
-            // OneMax problem
-            if (comboBoxProblem.SelectedIndex == ONEMAX_INDEX)
+            if (comboBoxProblem.SelectedIndex == ANN_INDEX)
             {
 
-                // Set Genotype
-                BinaryGenotype binaryGenotype = new BinaryGenotype((int)numericNumBits.Value);
-                eaLoop.Genotype = binaryGenotype;
+                // Setup ANN
 
-                // Set Phenotype Developer
-                eaLoop.PhenotypeDeveloper = new BinaryToBinaryDeveloper();
+                // These settings are currently hardcoded
+                int numSensorNodes = 6;
+                int numMotorNodes = 3;
 
-                // Set Fitness Evaluator
-                OneMaxEvaluator oneMaxEvaluator = new OneMaxEvaluator();
-                if (checkBoxRandomGoal.Checked)
-                {
-                    binaryGenotype.Randomize(random);
-                    oneMaxEvaluator.Goal = binaryGenotype.BitVector;
-                } else
-                {
-                    int[] goal = new int[binaryGenotype.NumBits];
-                    for (int i=0; i<binaryGenotype.NumBits; i++)
-                    {
-                        goal[i] = 1;
-                    }
-                    oneMaxEvaluator.Goal = goal;
-                }
-                eaLoop.FitnessEvaluator = oneMaxEvaluator;
+                // Number of hidden layers
+                int numHiddenLayers = listBoxANN.Items.Count;
 
-                // Set Genetic operator
-                eaLoop.GeneticOperator = new BinaryGeneticOperator();
-                eaLoop.GeneticOperator.MutationRate = (float)mutationNumeric.Value;
-                eaLoop.GeneticOperator.CrossoverRate = (float)crossoverNumeric.Value;
+                // The array containing the number of nodes for each hidden layer
+                int[] numNodesPerLayer = listBoxANN.Items.OfType<int>().ToArray();
 
-                // Set goal
-                eaLoop.goal = binaryGenotype.NumBits;
-            }
+                // Setup the actication function (currently hardcoded)
+                ActivationFunction activationFunction = new SigmoidActivation();
 
-            if (comboBoxProblem.SelectedIndex == LOLZ_INDEX)
-            {
-                // Set Genotype
-                eaLoop.Genotype = new BinaryGenotype((int)numericNumBits.Value);
-
-                // Set Phenotype Developer
-                eaLoop.PhenotypeDeveloper = new BinaryToBinaryDeveloper();
-
-                // Set Fitness Evaluator
-                LOLZEvaluator lolzEvaluator = new LOLZEvaluator();
-                lolzEvaluator.Z = (int)numericZ.Value;
-                eaLoop.FitnessEvaluator = lolzEvaluator;
+                ANN ann = new ANN(numSensorNodes, numMotorNodes, numHiddenLayers, numNodesPerLayer, activationFunction);
 
 
-                // Set Genetic operator
-                eaLoop.GeneticOperator = new BinaryGeneticOperator();
-                eaLoop.GeneticOperator.MutationRate = (float)mutationNumeric.Value;
-                eaLoop.GeneticOperator.CrossoverRate = (float)crossoverNumeric.Value;
-                eaLoop.goal = (int)numericNumBits.Value;
 
-            }
 
-            if (comboBoxProblem.SelectedIndex == SURPRISING_INDEX)
-            {
 
-                // Get settings
-                int S = (int)numericSurprisingS.Value;
-                int L = (int)numericSurprisingL.Value;
-                int numBits = (int)Math.Ceiling(Math.Log(S) / Math.Log(2));
 
-                // Set Genotype
-                eaLoop.Genotype = new BinaryGenotype(numBits * L);
 
-                // Set Phenotype Developer
-                BinaryToSymbolDeveloper developer = new BinaryToSymbolDeveloper();
-                developer.SymbolSize = numBits;
-                developer.S = S;
-                eaLoop.PhenotypeDeveloper = developer;
 
-                // Set Fitness Evaluator
-                SurprisingEvaluator surprisingEvaluator = new SurprisingEvaluator();
-                surprisingEvaluator.Local = checkBoxLocal.Checked;
-                eaLoop.FitnessEvaluator = surprisingEvaluator;
-                
-                // Set Genetic operator
-                eaLoop.GeneticOperator = new BinaryGeneticOperator();
-                eaLoop.GeneticOperator.MutationRate = (float)mutationNumeric.Value;
-                eaLoop.GeneticOperator.CrossoverRate = (float)crossoverNumeric.Value;
-
-                // Set Goal
-                if (checkBoxLocal.Checked)
-                {
-                    eaLoop.goal = L;
-                } else
-                {
-                    eaLoop.goal = (L -2) * (L - 3) / 2;
-                }
 
             }
         }
@@ -302,22 +230,6 @@ namespace Flatland
         // Problem ComboBox
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
-            bool onemaxStatus = (comboBoxProblem.SelectedIndex == ONEMAX_INDEX);
-            bool lolzStatus = (comboBoxProblem.SelectedIndex == LOLZ_INDEX);
-            bool surprisingStatus = (comboBoxProblem.SelectedIndex == SURPRISING_INDEX);
-
-            labelNumBits.Enabled = (onemaxStatus || lolzStatus);
-            numericNumBits.Enabled = (onemaxStatus || lolzStatus);
-            checkBoxRandomGoal.Enabled = onemaxStatus;
-
-            labelZ.Enabled = lolzStatus;
-            numericZ.Enabled = lolzStatus;
-
-            labelSymbolSize.Enabled = surprisingStatus;
-            numericSurprisingS.Enabled = surprisingStatus;
-            labelLength.Enabled = surprisingStatus;
-            numericSurprisingL.Enabled = surprisingStatus;
-            checkBoxLocal.Enabled = surprisingStatus;
         }
 
         private void label1_Click(object sender, EventArgs e)
@@ -333,9 +245,6 @@ namespace Flatland
         private void bgw_DoWork(object sender, DoWorkEventArgs e)
         {
             
-
-            
-
             BackgroundWorker worker = sender as BackgroundWorker;
 
             // Get settings
@@ -549,6 +458,34 @@ namespace Flatland
         private void label7_Click_1(object sender, EventArgs e)
         {
 
+        }
+
+        private void listView1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void numericUpDown1_ValueChanged(object sender, EventArgs e)
+        {
+            // Do nothing if no layer is selected
+            if (listBoxANN.SelectedIndex < 0) return;
+
+            listBoxANN.Items[listBoxANN.SelectedIndex] = (int)numericNumNodes.Value;
+        }
+
+        private void buttonAddLayer_Click(object sender, EventArgs e)
+        {
+            // Add a new layer
+            listBoxANN.Items.Add((int)numericNumNodes.Value);
+        }
+
+        private void buttonRemoveLayer_Click(object sender, EventArgs e)
+        {
+            // Do nothing if no layer is selected
+            if (listBoxANN.SelectedIndex < 0) return;
+
+            // Remove the selected index
+            listBoxANN.Items.RemoveAt(listBoxANN.SelectedIndex);
         }
     }
 }

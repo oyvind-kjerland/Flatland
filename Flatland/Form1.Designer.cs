@@ -28,8 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea3 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend3 = new System.Windows.Forms.DataVisualization.Charting.Legend();
             this.startButton = new System.Windows.Forms.Button();
             this.comboBoxProblem = new System.Windows.Forms.ComboBox();
             this.labelProblem = new System.Windows.Forms.Label();
@@ -46,50 +46,42 @@
             this.numericAdultCount = new System.Windows.Forms.NumericUpDown();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
-            this.labelNumBits = new System.Windows.Forms.Label();
-            this.numericNumBits = new System.Windows.Forms.NumericUpDown();
             this.label5 = new System.Windows.Forms.Label();
             this.numericNumGenerations = new System.Windows.Forms.NumericUpDown();
             this.labelTournamentE = new System.Windows.Forms.Label();
             this.labelTournamentK = new System.Windows.Forms.Label();
             this.numericTournamentE = new System.Windows.Forms.NumericUpDown();
             this.numericTournamentK = new System.Windows.Forms.NumericUpDown();
-            this.labelSymbolSize = new System.Windows.Forms.Label();
-            this.numericSurprisingS = new System.Windows.Forms.NumericUpDown();
-            this.labelLength = new System.Windows.Forms.Label();
-            this.numericSurprisingL = new System.Windows.Forms.NumericUpDown();
             this.cancelButton = new System.Windows.Forms.Button();
             this.clearButton = new System.Windows.Forms.Button();
             this.checkBoxMax = new System.Windows.Forms.CheckBox();
             this.checkBoxAverage = new System.Windows.Forms.CheckBox();
             this.checkBoxClearOnRun = new System.Windows.Forms.CheckBox();
-            this.numericZ = new System.Windows.Forms.NumericUpDown();
-            this.labelZ = new System.Windows.Forms.Label();
-            this.checkBoxLocal = new System.Windows.Forms.CheckBox();
             this.label4 = new System.Windows.Forms.Label();
             this.numericNumRuns = new System.Windows.Forms.NumericUpDown();
-            this.checkBoxRandomGoal = new System.Windows.Forms.CheckBox();
             this.labelRankMax = new System.Windows.Forms.Label();
             this.labelRankMin = new System.Windows.Forms.Label();
             this.numericRankMax = new System.Windows.Forms.NumericUpDown();
             this.numericRankMin = new System.Windows.Forms.NumericUpDown();
             this.checkBoxSd = new System.Windows.Forms.CheckBox();
             this.checkBoxElitism = new System.Windows.Forms.CheckBox();
+            this.listBoxANN = new System.Windows.Forms.ListBox();
+            this.label6 = new System.Windows.Forms.Label();
+            this.numericNumNodes = new System.Windows.Forms.NumericUpDown();
+            this.buttonRemoveLayer = new System.Windows.Forms.Button();
+            this.buttonAddLayer = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.chart1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.crossoverNumeric)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.mutationNumeric)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericChildCount)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericAdultCount)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericNumBits)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericNumGenerations)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericTournamentE)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericTournamentK)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericSurprisingS)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericSurprisingL)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericZ)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericNumRuns)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericRankMax)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericRankMin)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericNumNodes)).BeginInit();
             this.SuspendLayout();
             // 
             // startButton
@@ -107,9 +99,7 @@
             this.comboBoxProblem.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.comboBoxProblem.FormattingEnabled = true;
             this.comboBoxProblem.Items.AddRange(new object[] {
-            "OneMax",
-            "LOLZ",
-            "Surprising Sequences"});
+            "Flatland"});
             this.comboBoxProblem.Location = new System.Drawing.Point(66, 11);
             this.comboBoxProblem.Name = "comboBoxProblem";
             this.comboBoxProblem.Size = new System.Drawing.Size(121, 21);
@@ -175,14 +165,14 @@
             // 
             // chart1
             // 
-            chartArea1.AxisX.Maximum = 100D;
-            chartArea1.AxisX.Minimum = 0D;
-            chartArea1.AxisX.Title = "Generation";
-            chartArea1.AxisY.Title = "Fitness";
-            chartArea1.Name = "ChartArea1";
-            this.chart1.ChartAreas.Add(chartArea1);
-            legend1.Name = "Legend1";
-            this.chart1.Legends.Add(legend1);
+            chartArea3.AxisX.Maximum = 100D;
+            chartArea3.AxisX.Minimum = 0D;
+            chartArea3.AxisX.Title = "Generation";
+            chartArea3.AxisY.Title = "Fitness";
+            chartArea3.Name = "ChartArea1";
+            this.chart1.ChartAreas.Add(chartArea3);
+            legend3.Name = "Legend1";
+            this.chart1.Legends.Add(legend3);
             this.chart1.Location = new System.Drawing.Point(12, 206);
             this.chart1.Name = "chart1";
             this.chart1.Size = new System.Drawing.Size(871, 268);
@@ -320,32 +310,6 @@
             this.label3.TabIndex = 18;
             this.label3.Text = "Adult Population Size";
             // 
-            // labelNumBits
-            // 
-            this.labelNumBits.AutoSize = true;
-            this.labelNumBits.Location = new System.Drawing.Point(9, 40);
-            this.labelNumBits.Name = "labelNumBits";
-            this.labelNumBits.Size = new System.Drawing.Size(76, 13);
-            this.labelNumBits.TabIndex = 20;
-            this.labelNumBits.Text = "Number of Bits";
-            // 
-            // numericNumBits
-            // 
-            this.numericNumBits.Location = new System.Drawing.Point(94, 38);
-            this.numericNumBits.Maximum = new decimal(new int[] {
-            1000,
-            0,
-            0,
-            0});
-            this.numericNumBits.Name = "numericNumBits";
-            this.numericNumBits.Size = new System.Drawing.Size(93, 20);
-            this.numericNumBits.TabIndex = 19;
-            this.numericNumBits.Value = new decimal(new int[] {
-            40,
-            0,
-            0,
-            0});
-            // 
             // label5
             // 
             this.label5.AutoSize = true;
@@ -442,58 +406,6 @@
             0,
             0});
             // 
-            // labelSymbolSize
-            // 
-            this.labelSymbolSize.AutoSize = true;
-            this.labelSymbolSize.Location = new System.Drawing.Point(9, 112);
-            this.labelSymbolSize.Name = "labelSymbolSize";
-            this.labelSymbolSize.Size = new System.Drawing.Size(80, 13);
-            this.labelSymbolSize.TabIndex = 28;
-            this.labelSymbolSize.Text = "Symbol Size (S)";
-            // 
-            // numericSurprisingS
-            // 
-            this.numericSurprisingS.Location = new System.Drawing.Point(94, 110);
-            this.numericSurprisingS.Maximum = new decimal(new int[] {
-            1000,
-            0,
-            0,
-            0});
-            this.numericSurprisingS.Name = "numericSurprisingS";
-            this.numericSurprisingS.Size = new System.Drawing.Size(93, 20);
-            this.numericSurprisingS.TabIndex = 27;
-            this.numericSurprisingS.Value = new decimal(new int[] {
-            40,
-            0,
-            0,
-            0});
-            // 
-            // labelLength
-            // 
-            this.labelLength.AutoSize = true;
-            this.labelLength.Location = new System.Drawing.Point(12, 138);
-            this.labelLength.Name = "labelLength";
-            this.labelLength.Size = new System.Drawing.Size(55, 13);
-            this.labelLength.TabIndex = 30;
-            this.labelLength.Text = "Length (L)";
-            // 
-            // numericSurprisingL
-            // 
-            this.numericSurprisingL.Location = new System.Drawing.Point(94, 136);
-            this.numericSurprisingL.Maximum = new decimal(new int[] {
-            1000,
-            0,
-            0,
-            0});
-            this.numericSurprisingL.Name = "numericSurprisingL";
-            this.numericSurprisingL.Size = new System.Drawing.Size(93, 20);
-            this.numericSurprisingL.TabIndex = 29;
-            this.numericSurprisingL.Value = new decimal(new int[] {
-            40,
-            0,
-            0,
-            0});
-            // 
             // cancelButton
             // 
             this.cancelButton.Location = new System.Drawing.Point(96, 177);
@@ -546,43 +458,6 @@
             this.checkBoxClearOnRun.Text = "Clear on Run";
             this.checkBoxClearOnRun.UseVisualStyleBackColor = true;
             // 
-            // numericZ
-            // 
-            this.numericZ.Location = new System.Drawing.Point(94, 84);
-            this.numericZ.Maximum = new decimal(new int[] {
-            1000,
-            0,
-            0,
-            0});
-            this.numericZ.Name = "numericZ";
-            this.numericZ.Size = new System.Drawing.Size(93, 20);
-            this.numericZ.TabIndex = 36;
-            this.numericZ.Value = new decimal(new int[] {
-            40,
-            0,
-            0,
-            0});
-            // 
-            // labelZ
-            // 
-            this.labelZ.AutoSize = true;
-            this.labelZ.Location = new System.Drawing.Point(9, 86);
-            this.labelZ.Name = "labelZ";
-            this.labelZ.Size = new System.Drawing.Size(14, 13);
-            this.labelZ.TabIndex = 37;
-            this.labelZ.Text = "Z";
-            // 
-            // checkBoxLocal
-            // 
-            this.checkBoxLocal.AutoSize = true;
-            this.checkBoxLocal.Location = new System.Drawing.Point(135, 160);
-            this.checkBoxLocal.Name = "checkBoxLocal";
-            this.checkBoxLocal.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.checkBoxLocal.Size = new System.Drawing.Size(52, 17);
-            this.checkBoxLocal.TabIndex = 38;
-            this.checkBoxLocal.Text = "Local";
-            this.checkBoxLocal.UseVisualStyleBackColor = true;
-            // 
             // label4
             // 
             this.label4.AutoSize = true;
@@ -613,17 +488,6 @@
             0,
             0,
             0});
-            // 
-            // checkBoxRandomGoal
-            // 
-            this.checkBoxRandomGoal.AutoSize = true;
-            this.checkBoxRandomGoal.Location = new System.Drawing.Point(94, 62);
-            this.checkBoxRandomGoal.Name = "checkBoxRandomGoal";
-            this.checkBoxRandomGoal.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.checkBoxRandomGoal.Size = new System.Drawing.Size(91, 17);
-            this.checkBoxRandomGoal.TabIndex = 41;
-            this.checkBoxRandomGoal.Text = "Random Goal";
-            this.checkBoxRandomGoal.UseVisualStyleBackColor = true;
             // 
             // labelRankMax
             // 
@@ -710,41 +574,91 @@
             this.checkBoxElitism.Text = "Elitism";
             this.checkBoxElitism.UseVisualStyleBackColor = true;
             // 
+            // listBoxANN
+            // 
+            this.listBoxANN.FormattingEnabled = true;
+            this.listBoxANN.Location = new System.Drawing.Point(130, 38);
+            this.listBoxANN.Name = "listBoxANN";
+            this.listBoxANN.Size = new System.Drawing.Size(93, 95);
+            this.listBoxANN.TabIndex = 48;
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(12, 138);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(167, 13);
+            this.label6.TabIndex = 50;
+            this.label6.Text = "Number of nodes in selected layer";
+            // 
+            // numericNumNodes
+            // 
+            this.numericNumNodes.Location = new System.Drawing.Point(181, 136);
+            this.numericNumNodes.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.numericNumNodes.Name = "numericNumNodes";
+            this.numericNumNodes.Size = new System.Drawing.Size(42, 20);
+            this.numericNumNodes.TabIndex = 49;
+            this.numericNumNodes.Value = new decimal(new int[] {
+            100,
+            0,
+            0,
+            0});
+            this.numericNumNodes.ValueChanged += new System.EventHandler(this.numericUpDown1_ValueChanged);
+            // 
+            // buttonRemoveLayer
+            // 
+            this.buttonRemoveLayer.Location = new System.Drawing.Point(15, 67);
+            this.buttonRemoveLayer.Name = "buttonRemoveLayer";
+            this.buttonRemoveLayer.Size = new System.Drawing.Size(109, 23);
+            this.buttonRemoveLayer.TabIndex = 52;
+            this.buttonRemoveLayer.Text = "Remove Layer";
+            this.buttonRemoveLayer.UseVisualStyleBackColor = true;
+            this.buttonRemoveLayer.Click += new System.EventHandler(this.buttonRemoveLayer_Click);
+            // 
+            // buttonAddLayer
+            // 
+            this.buttonAddLayer.Location = new System.Drawing.Point(15, 38);
+            this.buttonAddLayer.Name = "buttonAddLayer";
+            this.buttonAddLayer.Size = new System.Drawing.Size(109, 23);
+            this.buttonAddLayer.TabIndex = 51;
+            this.buttonAddLayer.Text = "Add Layer";
+            this.buttonAddLayer.UseVisualStyleBackColor = true;
+            this.buttonAddLayer.Click += new System.EventHandler(this.buttonAddLayer_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
             this.ClientSize = new System.Drawing.Size(895, 486);
+            this.Controls.Add(this.buttonRemoveLayer);
+            this.Controls.Add(this.buttonAddLayer);
+            this.Controls.Add(this.label6);
+            this.Controls.Add(this.numericNumNodes);
+            this.Controls.Add(this.listBoxANN);
             this.Controls.Add(this.checkBoxElitism);
             this.Controls.Add(this.checkBoxSd);
             this.Controls.Add(this.labelRankMax);
             this.Controls.Add(this.labelRankMin);
             this.Controls.Add(this.numericRankMax);
             this.Controls.Add(this.numericRankMin);
-            this.Controls.Add(this.checkBoxRandomGoal);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.numericNumRuns);
-            this.Controls.Add(this.checkBoxLocal);
-            this.Controls.Add(this.labelZ);
-            this.Controls.Add(this.numericZ);
             this.Controls.Add(this.checkBoxClearOnRun);
             this.Controls.Add(this.checkBoxAverage);
             this.Controls.Add(this.checkBoxMax);
             this.Controls.Add(this.clearButton);
             this.Controls.Add(this.cancelButton);
-            this.Controls.Add(this.labelLength);
-            this.Controls.Add(this.numericSurprisingL);
-            this.Controls.Add(this.labelSymbolSize);
-            this.Controls.Add(this.numericSurprisingS);
             this.Controls.Add(this.labelTournamentE);
             this.Controls.Add(this.labelTournamentK);
             this.Controls.Add(this.numericTournamentE);
             this.Controls.Add(this.numericTournamentK);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.numericNumGenerations);
-            this.Controls.Add(this.labelNumBits);
-            this.Controls.Add(this.numericNumBits);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.numericAdultCount);
@@ -769,16 +683,13 @@
             ((System.ComponentModel.ISupportInitialize)(this.mutationNumeric)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericChildCount)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericAdultCount)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericNumBits)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericNumGenerations)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericTournamentE)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericTournamentK)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericSurprisingS)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericSurprisingL)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericZ)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericNumRuns)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericRankMax)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericRankMin)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericNumNodes)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -802,35 +713,30 @@
         private System.Windows.Forms.NumericUpDown numericAdultCount;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Label labelNumBits;
-        private System.Windows.Forms.NumericUpDown numericNumBits;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.NumericUpDown numericNumGenerations;
         private System.Windows.Forms.Label labelTournamentE;
         private System.Windows.Forms.Label labelTournamentK;
         private System.Windows.Forms.NumericUpDown numericTournamentE;
         private System.Windows.Forms.NumericUpDown numericTournamentK;
-        private System.Windows.Forms.Label labelSymbolSize;
-        private System.Windows.Forms.NumericUpDown numericSurprisingS;
-        private System.Windows.Forms.Label labelLength;
-        private System.Windows.Forms.NumericUpDown numericSurprisingL;
         private System.Windows.Forms.Button cancelButton;
         private System.Windows.Forms.Button clearButton;
         private System.Windows.Forms.CheckBox checkBoxMax;
         private System.Windows.Forms.CheckBox checkBoxAverage;
         private System.Windows.Forms.CheckBox checkBoxClearOnRun;
-        private System.Windows.Forms.NumericUpDown numericZ;
-        private System.Windows.Forms.Label labelZ;
-        private System.Windows.Forms.CheckBox checkBoxLocal;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.NumericUpDown numericNumRuns;
-        private System.Windows.Forms.CheckBox checkBoxRandomGoal;
         private System.Windows.Forms.Label labelRankMax;
         private System.Windows.Forms.Label labelRankMin;
         private System.Windows.Forms.NumericUpDown numericRankMax;
         private System.Windows.Forms.NumericUpDown numericRankMin;
         private System.Windows.Forms.CheckBox checkBoxSd;
         private System.Windows.Forms.CheckBox checkBoxElitism;
+        private System.Windows.Forms.ListBox listBoxANN;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.NumericUpDown numericNumNodes;
+        private System.Windows.Forms.Button buttonRemoveLayer;
+        private System.Windows.Forms.Button buttonAddLayer;
     }
 }
 
