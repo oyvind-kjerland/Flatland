@@ -14,8 +14,11 @@ namespace Flatland
         public enum MovementDirection { FORWARD, LEFT, RIGHT}
 
         public FacingDirection facingDirection = FacingDirection.SOUTH;
+        public Board.State[] sensors = new Board.State[3];
         public Tuple<int, int> position;
         public Board board;
+        public int foodScore { get; set; }
+        public int poisonScore { get; set; }
 
         public Player(Board board, Tuple<int, int> position)
         {
@@ -29,97 +32,120 @@ namespace Flatland
         /// <param name="dir">Direction to move</param>
         public void Move(MovementDirection dir)
         {
-            Tuple<int, int> nextPos = null;
-            FacingDirection nextFacingDirection = FacingDirection.NORTH;
+            FacingDirection nextFacingDirection = GetNewDirection(dir, facingDirection);
+            Tuple<int, int> nextPos = board.GetNextPosition(nextFacingDirection, position);
 
+            // Remove the player from where we were before, i.e set it to FREE
+            board.board[position.Item1, position.Item2] = Board.State.Free;
+
+            // Update to new position
+            position = nextPos;
+
+            // Consume item at new position
+            ConsumeItem(position);
+
+            // Update direction
+            facingDirection = nextFacingDirection;
+
+            // Update position in board
+            board.board[position.Item1, position.Item2] = Board.State.Player;
+
+            UpdateSensors(position);
+        }
+
+        private FacingDirection GetNewDirection(MovementDirection dir, FacingDirection facingDirection)
+        {
             switch (facingDirection)
             {
                 case FacingDirection.NORTH:
                     if (dir == MovementDirection.FORWARD)
                     {
-                        nextPos = board.GetNextPosition(FacingDirection.NORTH, position);
-                        nextFacingDirection = FacingDirection.NORTH;
+                        return FacingDirection.NORTH;
                     }
                     else if (dir == MovementDirection.LEFT)
                     {
-                        nextPos = board.GetNextPosition(FacingDirection.WEST, position);
-                        nextFacingDirection = FacingDirection.WEST;
+                        return FacingDirection.WEST;
                     }
                     else if (dir == MovementDirection.RIGHT)
                     {
-                        nextPos = board.GetNextPosition(FacingDirection.EAST, position);
-                        nextFacingDirection = FacingDirection.EAST;
+                        return FacingDirection.EAST;
                     }
                     break;
 
                 case FacingDirection.EAST:
                     if (dir == MovementDirection.FORWARD)
                     {
-                        nextPos = board.GetNextPosition(FacingDirection.EAST, position);
-                        nextFacingDirection = FacingDirection.EAST;
+                        return FacingDirection.EAST;
                     }
                     else if (dir == MovementDirection.LEFT)
                     {
-                        nextPos = board.GetNextPosition(FacingDirection.NORTH, position);
-                        nextFacingDirection = FacingDirection.NORTH;
+                        return FacingDirection.NORTH;
                     }
                     else if (dir == MovementDirection.RIGHT)
                     {
-                        nextPos = board.GetNextPosition(FacingDirection.SOUTH, position);
-                        nextFacingDirection = FacingDirection.SOUTH;
+                        return FacingDirection.SOUTH;
                     }
                     break;
 
                 case FacingDirection.WEST:
                     if (dir == MovementDirection.FORWARD)
                     {
-                        nextPos = board.GetNextPosition(FacingDirection.WEST, position);
-                        nextFacingDirection = FacingDirection.WEST;
+                        return FacingDirection.WEST;
                     }
                     else if (dir == MovementDirection.LEFT)
                     {
-                        nextPos = board.GetNextPosition(FacingDirection.SOUTH, position);
-                        nextFacingDirection = FacingDirection.SOUTH;
+                        return FacingDirection.SOUTH;
                     }
                     else if (dir == MovementDirection.RIGHT)
                     {
-                        nextPos = board.GetNextPosition(FacingDirection.NORTH, position);
-                        nextFacingDirection = FacingDirection.NORTH;
+                        return FacingDirection.NORTH;
                     }
                     break;
 
                 case FacingDirection.SOUTH:
                     if (dir == MovementDirection.FORWARD)
                     {
-                        nextPos = board.GetNextPosition(FacingDirection.SOUTH, position);
-                        nextFacingDirection = FacingDirection.SOUTH;
+                        return FacingDirection.SOUTH;
                     }
                     else if (dir == MovementDirection.LEFT)
                     {
-                        nextPos = board.GetNextPosition(FacingDirection.EAST, position);
-                        nextFacingDirection = FacingDirection.EAST;
+                        return FacingDirection.EAST;
                     }
                     else if (dir == MovementDirection.RIGHT)
                     {
-                        nextPos = board.GetNextPosition(FacingDirection.WEST, position);
-                        nextFacingDirection = FacingDirection.WEST;
+                        return FacingDirection.WEST;
                     }
                     break;
             }
 
-            // Consume the item at the state we were in before, i.e set it to FREE
-            board.board[position.Item1, position.Item2] = Board.State.Free;
+            return FacingDirection.NORTH;
+        }
 
-            // Update to new position
-            position = nextPos;
+        private void UpdateSensors(Tuple<int, int> position)
+        {
+            // Forward
+            FacingDirection forwardDirection = GetNewDirection(MovementDirection.FORWARD, facingDirection);
+            sensors[0] = board.GetStateOfPosition(board.GetNextPosition(forwardDirection, position));
+            // Right
+            FacingDirection rightDirection = GetNewDirection(MovementDirection.RIGHT, facingDirection);
+            sensors[1] = board.GetStateOfPosition(board.GetNextPosition(rightDirection, position));
+            // Left
+            FacingDirection leftDirection = GetNewDirection(MovementDirection.LEFT, facingDirection);
+            sensors[2] = board.GetStateOfPosition(board.GetNextPosition(leftDirection, position));
+        }
 
-            // Update direction
-            facingDirection = nextFacingDirection;
-            Console.WriteLine("Facing: " + facingDirection);
-
-            // Update position in board
-            board.board[position.Item1, position.Item2] = Board.State.Player;
-
+        private void ConsumeItem(Tuple<int,int> position)
+        {
+            // Update scores.
+            switch (board.board[position.Item1, position.Item2])
+            {
+                case Board.State.Food:
+                    foodScore++;
+                    break;
+                case Board.State.Poison:
+                    poisonScore++;
+                    break;
+            }
         }
 
         internal RotateFlipType GetRotationFlipType()

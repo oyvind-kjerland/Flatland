@@ -121,6 +121,11 @@ namespace Flatland
             }
         }
 
+        public State GetStateOfPosition(Tuple<int,int> position)
+        {
+            return board[position.Item1, position.Item2];
+        }
+
         public int GetRows()
         {
             return board.GetLength(0);
