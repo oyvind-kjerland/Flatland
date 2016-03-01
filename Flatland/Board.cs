@@ -34,15 +34,17 @@ namespace Flatland
                 }
             }
 
-            initialBoard = (State[,])board.Clone();
 
             InitializeBoard(FPD);
+
             PlaceRandomPlayer();
+            initialBoard = (State[,])board.Clone();
+
         }
 
         public void ResetBoard()
         {
-            board = initialBoard;
+            board = (State[,])initialBoard.Clone();
             player.ResetPlayer();
         }
 

@@ -61,7 +61,7 @@ namespace Flatland
         {
             comboBoxProblem.SelectedIndex = 0;
             comboBoxAdultSelector.SelectedIndex = 0;
-            comboBoxParentSelector.SelectedIndex = 0;
+            comboBoxParentSelector.SelectedIndex = TOURNAMENT_INDEX;
 
 
         }
@@ -108,9 +108,24 @@ namespace Flatland
 
 
                 // Setup fitness evaluator
-                //FLatlandEvaluator.ANN = ann;
+                FlatlandFitnessEvaluator evaluator = new FlatlandFitnessEvaluator();
+                evaluator.ann = ann;
+                evaluator.changeBoardBetweenGenerations = false;
+                evaluator.numBoards = 1;
+                evaluator.dimensions = new int[] { 10, 10 };
+                evaluator.FPD = new float[] { 0.33f, 0.33f };
+                evaluator.timeSteps = 60;
+
+                eaLoop.FitnessEvaluator = evaluator;
 
 
+                // Set Genetic operator
+                eaLoop.GeneticOperator = new BinaryGeneticOperator();
+                eaLoop.GeneticOperator.MutationRate = (float)mutationNumeric.Value;
+                eaLoop.GeneticOperator.CrossoverRate = (float)crossoverNumeric.Value;
+
+
+                eaLoop.goal = int.MaxValue;
             }
         }
 
@@ -500,6 +515,19 @@ namespace Flatland
 
             // Remove the selected index
             listBoxANN.Items.RemoveAt(listBoxANN.SelectedIndex);
+        }
+
+        private void buttonShowSimulation_Click(object sender, EventArgs e)
+        {
+
+            FlatlandFitnessEvaluator evaluator = (FlatlandFitnessEvaluator)eaLoop.FitnessEvaluator;
+            Board board = evaluator.boards[0];
+            board.ResetBoard();
+
+            SimulationForm simulationForm = new SimulationForm(board);
+            simulationForm.bestIndividual = eaLoop.best;
+            simulationForm.ShowDialog();
+            
         }
     }
 }

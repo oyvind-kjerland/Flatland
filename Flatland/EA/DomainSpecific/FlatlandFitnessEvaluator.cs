@@ -13,13 +13,24 @@ namespace Flatland.EA.DomainSpecific
         public ANN ann;
         public bool changeBoardBetweenGenerations;
         public List<Board> boards;
-        private float[] FPD;
-        private int[] dimensions;
+        public int numBoards = 5;
+        public float[] FPD;
+        public int[] dimensions;
         public int timeSteps;
 
-        public void CreateBoard()
+        public FlatlandFitnessEvaluator()
         {
-            boards.Add(new Board(FPD, dimensions));
+            boards = new List<Board>();
+        }
+
+        public void CreateBoards(int n)
+        {
+            for (int i=0; i<n; i++)
+            {
+                Board board = new Board(FPD, dimensions);
+                board.player.ann = ann;
+                boards.Add(board);
+            }
         }
 
         public override float Evaluate(Individual individual)
@@ -48,17 +59,11 @@ namespace Flatland.EA.DomainSpecific
 
         public override void NextGeneration()
         {
-            if (changeBoardBetweenGenerations)
+            if (changeBoardBetweenGenerations || boards.Count == 0)
             {
-                int numBoards = boards.Count;
                 boards.Clear();
 
-                for (int i = 0; i < numBoards; i++)
-                {
-                    Board board = new Board(FPD, dimensions);
-                    board.player.ann = this.ann;
-                    boards.Add(board);
-                }
+                CreateBoards(numBoards);
             }
         }
     }

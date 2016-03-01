@@ -28,8 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea3 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend3 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend2 = new System.Windows.Forms.DataVisualization.Charting.Legend();
             this.startButton = new System.Windows.Forms.Button();
             this.comboBoxProblem = new System.Windows.Forms.ComboBox();
             this.labelProblem = new System.Windows.Forms.Label();
@@ -70,6 +70,7 @@
             this.numericNumNodes = new System.Windows.Forms.NumericUpDown();
             this.buttonRemoveLayer = new System.Windows.Forms.Button();
             this.buttonAddLayer = new System.Windows.Forms.Button();
+            this.buttonShowSimulation = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.chart1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.crossoverNumeric)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.mutationNumeric)).BeginInit();
@@ -165,14 +166,14 @@
             // 
             // chart1
             // 
-            chartArea3.AxisX.Maximum = 100D;
-            chartArea3.AxisX.Minimum = 0D;
-            chartArea3.AxisX.Title = "Generation";
-            chartArea3.AxisY.Title = "Fitness";
-            chartArea3.Name = "ChartArea1";
-            this.chart1.ChartAreas.Add(chartArea3);
-            legend3.Name = "Legend1";
-            this.chart1.Legends.Add(legend3);
+            chartArea2.AxisX.Maximum = 100D;
+            chartArea2.AxisX.Minimum = 0D;
+            chartArea2.AxisX.Title = "Generation";
+            chartArea2.AxisY.Title = "Fitness";
+            chartArea2.Name = "ChartArea1";
+            this.chart1.ChartAreas.Add(chartArea2);
+            legend2.Name = "Legend1";
+            this.chart1.Legends.Add(legend2);
             this.chart1.Location = new System.Drawing.Point(12, 206);
             this.chart1.Name = "chart1";
             this.chart1.Size = new System.Drawing.Size(871, 268);
@@ -197,11 +198,6 @@
             this.crossoverNumeric.Name = "crossoverNumeric";
             this.crossoverNumeric.Size = new System.Drawing.Size(66, 20);
             this.crossoverNumeric.TabIndex = 11;
-            this.crossoverNumeric.Value = new decimal(new int[] {
-            9,
-            0,
-            0,
-            65536});
             this.crossoverNumeric.ValueChanged += new System.EventHandler(this.crossoverNumeric_ValueChanged);
             // 
             // mutationNumeric
@@ -225,7 +221,7 @@
             1,
             0,
             0,
-            65536});
+            196608});
             this.mutationNumeric.ValueChanged += new System.EventHandler(this.mutationNumeric_ValueChanged);
             // 
             // mutationRateLabel
@@ -264,7 +260,7 @@
             this.numericChildCount.Size = new System.Drawing.Size(87, 20);
             this.numericChildCount.TabIndex = 15;
             this.numericChildCount.Value = new decimal(new int[] {
-            1000,
+            20,
             0,
             0,
             0});
@@ -286,7 +282,7 @@
             this.numericAdultCount.Size = new System.Drawing.Size(87, 20);
             this.numericAdultCount.TabIndex = 16;
             this.numericAdultCount.Value = new decimal(new int[] {
-            1000,
+            20,
             0,
             0,
             0});
@@ -336,7 +332,7 @@
             this.numericNumGenerations.Size = new System.Drawing.Size(66, 20);
             this.numericNumGenerations.TabIndex = 21;
             this.numericNumGenerations.Value = new decimal(new int[] {
-            100,
+            300,
             0,
             0,
             0});
@@ -401,7 +397,7 @@
             this.numericTournamentK.Size = new System.Drawing.Size(87, 20);
             this.numericTournamentK.TabIndex = 23;
             this.numericTournamentK.Value = new decimal(new int[] {
-            4,
+            3,
             0,
             0,
             0});
@@ -441,6 +437,8 @@
             // checkBoxAverage
             // 
             this.checkBoxAverage.AutoSize = true;
+            this.checkBoxAverage.Checked = true;
+            this.checkBoxAverage.CheckState = System.Windows.Forms.CheckState.Checked;
             this.checkBoxAverage.Location = new System.Drawing.Point(796, 137);
             this.checkBoxAverage.Name = "checkBoxAverage";
             this.checkBoxAverage.Size = new System.Drawing.Size(87, 17);
@@ -567,6 +565,8 @@
             // checkBoxElitism
             // 
             this.checkBoxElitism.AutoSize = true;
+            this.checkBoxElitism.Checked = true;
+            this.checkBoxElitism.CheckState = System.Windows.Forms.CheckState.Checked;
             this.checkBoxElitism.Location = new System.Drawing.Point(362, 96);
             this.checkBoxElitism.Name = "checkBoxElitism";
             this.checkBoxElitism.Size = new System.Drawing.Size(55, 17);
@@ -603,7 +603,7 @@
             this.numericNumNodes.Size = new System.Drawing.Size(42, 20);
             this.numericNumNodes.TabIndex = 49;
             this.numericNumNodes.Value = new decimal(new int[] {
-            100,
+            2,
             0,
             0,
             0});
@@ -629,12 +629,23 @@
             this.buttonAddLayer.UseVisualStyleBackColor = true;
             this.buttonAddLayer.Click += new System.EventHandler(this.buttonAddLayer_Click);
             // 
+            // buttonShowSimulation
+            // 
+            this.buttonShowSimulation.Location = new System.Drawing.Point(374, 177);
+            this.buttonShowSimulation.Name = "buttonShowSimulation";
+            this.buttonShowSimulation.Size = new System.Drawing.Size(94, 23);
+            this.buttonShowSimulation.TabIndex = 53;
+            this.buttonShowSimulation.Text = "Show Simulation";
+            this.buttonShowSimulation.UseVisualStyleBackColor = true;
+            this.buttonShowSimulation.Click += new System.EventHandler(this.buttonShowSimulation_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
             this.ClientSize = new System.Drawing.Size(895, 486);
+            this.Controls.Add(this.buttonShowSimulation);
             this.Controls.Add(this.buttonRemoveLayer);
             this.Controls.Add(this.buttonAddLayer);
             this.Controls.Add(this.label6);
@@ -737,6 +748,7 @@
         private System.Windows.Forms.NumericUpDown numericNumNodes;
         private System.Windows.Forms.Button buttonRemoveLayer;
         private System.Windows.Forms.Button buttonAddLayer;
+        private System.Windows.Forms.Button buttonShowSimulation;
     }
 }
 

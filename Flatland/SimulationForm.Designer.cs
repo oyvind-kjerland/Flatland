@@ -44,6 +44,7 @@
             this.forwardSensorlabel = new System.Windows.Forms.Label();
             this.rightSensorLabel = new System.Windows.Forms.Label();
             this.leftSensorLabel = new System.Windows.Forms.Label();
+            this.buttonStart = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -200,11 +201,22 @@
             this.leftSensorLabel.TabIndex = 17;
             this.leftSensorLabel.Text = "Free";
             // 
+            // buttonStart
+            // 
+            this.buttonStart.Location = new System.Drawing.Point(563, 391);
+            this.buttonStart.Name = "buttonStart";
+            this.buttonStart.Size = new System.Drawing.Size(75, 23);
+            this.buttonStart.TabIndex = 18;
+            this.buttonStart.Text = "Start";
+            this.buttonStart.UseVisualStyleBackColor = true;
+            this.buttonStart.Click += new System.EventHandler(this.buttonStart_Click);
+            // 
             // SimulationForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(820, 561);
+            this.Controls.Add(this.buttonStart);
             this.Controls.Add(this.leftSensorLabel);
             this.Controls.Add(this.rightSensorLabel);
             this.Controls.Add(this.forwardSensorlabel);
@@ -244,5 +256,6 @@
         private System.Windows.Forms.Label forwardSensorlabel;
         private System.Windows.Forms.Label rightSensorLabel;
         private System.Windows.Forms.Label leftSensorLabel;
+        private System.Windows.Forms.Button buttonStart;
     }
 }

@@ -69,6 +69,8 @@ namespace Flatland.EA
                 max = 0;
             }
 
+            FitnessEvaluator.NextGeneration();
+
             foreach (Individual individual in ChildPopulation)
             {
                 individual.Fitness = FitnessEvaluator.Evaluate(individual);

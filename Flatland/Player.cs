@@ -38,6 +38,7 @@ namespace Flatland
             this.foodScore = 0;
             this.poisonScore = 0;
             this.position = initialPosition;
+            this.facingDirection = FacingDirection.SOUTH;
         }
 
         /// <summary>
@@ -107,6 +108,13 @@ namespace Flatland
             }
 
             double[] res = ann.Run(annInputs);
+            res = ann.Run(annInputs);
+            res = ann.Run(annInputs);
+
+
+            MovementDirection dir = GetBestMoveFromArray(res);
+            dir = GetBestMoveFromArray(res);
+            dir = GetBestMoveFromArray(res);
 
             return GetBestMoveFromArray(res);
         }

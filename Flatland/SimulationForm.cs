@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Flatland.EA.DomainSpecific;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -10,10 +11,13 @@ using System.Windows.Forms;
 
 namespace Flatland
 {
-    public partial class SimulationForm : Form
+    partial class SimulationForm : Form
     {
 
         public Board board;
+        
+        public Individual bestIndividual;
+
 
         public SimulationForm(Board board)
         {
@@ -152,6 +156,27 @@ namespace Flatland
         private void SimulationUpdate(object sender, ProgressChangedEventArgs e)
         {
                 UpdateAllGUI((Board)e.UserState);
+        }
+
+        private void buttonStart_Click(object sender, EventArgs e)
+        {
+
+
+            ANNWeightPhenotype phenotype = (ANNWeightPhenotype)bestIndividual.Phenotype;
+            board.player.ann.SetWeights(phenotype.Weights);
+
+            List<MovementDirection> moves = new List<MovementDirection>();
+
+            // TOOD
+            for (int i = 0; i < 60; i++)
+            {
+                MovementDirection move = board.player.GetMove();
+                moves.Add(move);
+                board.player.Move(move);
+            }
+
+            board.ResetBoard();
+            SimulateVisualization(moves, board);
         }
     }
 }
