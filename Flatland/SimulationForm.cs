@@ -78,8 +78,10 @@ namespace Flatland
                 for (int j = 0; j < board.board.GetLength(1); j++)
                 {
                     PictureBox pb = (PictureBox)tableLayoutPanel1.GetControlFromPosition(j, i);
-                    pb.Image = board.GetStateImage(board.board[i, j]);
-                    pb.Refresh();
+                    if (pb.Image == null || (Board.State)pb.Image.Tag != board.board[i, j]) {
+                        pb.Image = board.GetStateImage(board.board[i, j]);
+                        pb.Refresh();
+                    }
                 }
             }
         }
@@ -139,6 +141,8 @@ namespace Flatland
 
         private void SimulationDoWork(object sender, DoWorkEventArgs e)
         {
+            BackgroundWorker worker = sender as BackgroundWorker;
+
             Tuple<Board, List<MovementDirection>> args = 
                 (Tuple<Board, List<MovementDirection>>)e.Argument;
 
@@ -147,9 +151,14 @@ namespace Flatland
 
             foreach (MovementDirection move in moves)
             {
+                if (worker.CancellationPending)
+                {
+                    e.Cancel = true;
+                    break;
+                }
                 board.player.Move(move);
                 backgroundWorker1.ReportProgress(0, board);
-                System.Threading.Thread.Sleep(500);
+                System.Threading.Thread.Sleep((int)delayNumericUpDown.Value);
             }
         }
 
@@ -160,6 +169,8 @@ namespace Flatland
 
         private void buttonStart_Click(object sender, EventArgs e)
         {
+            buttonStart.Enabled = false;
+            stopButton.Enabled = true;
 
             board.ResetBoard();
             ANNWeightPhenotype phenotype = (ANNWeightPhenotype)bestIndividual.Phenotype;
@@ -183,6 +194,17 @@ namespace Flatland
         {
             board = board.GetRandomizedBoard();
             UpdateAllGUI(board);
+        }
+
+        private void SimulationCompleted(object sender, RunWorkerCompletedEventArgs e)
+        {
+            buttonStart.Enabled = true;
+            stopButton.Enabled = false;
+        }
+
+        private void stopButton_Click(object sender, EventArgs e)
+        {
+            backgroundWorker1.CancelAsync();
         }
     }
 }

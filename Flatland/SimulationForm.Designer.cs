@@ -46,7 +46,11 @@
             this.leftSensorLabel = new System.Windows.Forms.Label();
             this.buttonStart = new System.Windows.Forms.Button();
             this.newBoardButton = new System.Windows.Forms.Button();
+            this.label6 = new System.Windows.Forms.Label();
+            this.delayNumericUpDown = new System.Windows.Forms.NumericUpDown();
+            this.stopButton = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.delayNumericUpDown)).BeginInit();
             this.SuspendLayout();
             // 
             // forwardButton
@@ -111,6 +115,7 @@
             this.backgroundWorker1.WorkerSupportsCancellation = true;
             this.backgroundWorker1.DoWork += new System.ComponentModel.DoWorkEventHandler(this.SimulationDoWork);
             this.backgroundWorker1.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(this.SimulationUpdate);
+            this.backgroundWorker1.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.SimulationCompleted);
             // 
             // label1
             // 
@@ -214,7 +219,7 @@
             // 
             // newBoardButton
             // 
-            this.newBoardButton.Location = new System.Drawing.Point(644, 391);
+            this.newBoardButton.Location = new System.Drawing.Point(723, 391);
             this.newBoardButton.Name = "newBoardButton";
             this.newBoardButton.Size = new System.Drawing.Size(75, 23);
             this.newBoardButton.TabIndex = 19;
@@ -222,11 +227,45 @@
             this.newBoardButton.UseVisualStyleBackColor = true;
             this.newBoardButton.Click += new System.EventHandler(this.newBoardButton_Click);
             // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(563, 447);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(34, 13);
+            this.label6.TabIndex = 20;
+            this.label6.Text = "Delay";
+            // 
+            // delayNumericUpDown
+            // 
+            this.delayNumericUpDown.Location = new System.Drawing.Point(597, 445);
+            this.delayNumericUpDown.Maximum = new decimal(new int[] {
+            10000,
+            0,
+            0,
+            0});
+            this.delayNumericUpDown.Name = "delayNumericUpDown";
+            this.delayNumericUpDown.Size = new System.Drawing.Size(120, 20);
+            this.delayNumericUpDown.TabIndex = 21;
+            // 
+            // stopButton
+            // 
+            this.stopButton.Location = new System.Drawing.Point(642, 391);
+            this.stopButton.Name = "stopButton";
+            this.stopButton.Size = new System.Drawing.Size(75, 23);
+            this.stopButton.TabIndex = 22;
+            this.stopButton.Text = "Stop";
+            this.stopButton.UseVisualStyleBackColor = true;
+            this.stopButton.Click += new System.EventHandler(this.stopButton_Click);
+            // 
             // SimulationForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(820, 561);
+            this.Controls.Add(this.stopButton);
+            this.Controls.Add(this.delayNumericUpDown);
+            this.Controls.Add(this.label6);
             this.Controls.Add(this.newBoardButton);
             this.Controls.Add(this.buttonStart);
             this.Controls.Add(this.leftSensorLabel);
@@ -246,6 +285,7 @@
             this.Name = "SimulationForm";
             this.Text = "SimulationForm";
             this.panel1.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.delayNumericUpDown)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -270,5 +310,8 @@
         private System.Windows.Forms.Label leftSensorLabel;
         private System.Windows.Forms.Button buttonStart;
         private System.Windows.Forms.Button newBoardButton;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.NumericUpDown delayNumericUpDown;
+        private System.Windows.Forms.Button stopButton;
     }
 }

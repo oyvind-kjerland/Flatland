@@ -126,21 +126,29 @@ namespace Flatland
         /// <returns>Returns appropriate image for a given state</returns>
         public Image GetStateImage(State s)
         {
+            Image image = null;
             switch (s)
             {
                 case State.Free:
-                    return null;
+                    image = Properties.Resources.empty;
+                    image.Tag = State.Free;
+                    break;
                 case State.Food:
-                    return Properties.Resources.rice;
+                    image = Properties.Resources.rice;
+                    image.Tag = State.Food;
+                    break;
                 case State.Poison:
-                    return Properties.Resources.poison;
+                    image = Properties.Resources.poison;
+                    image.Tag = State.Poison;
+                    break;
                 case State.Player:
-                    Image image = Properties.Resources.player;
+                    image = Properties.Resources.player;
+                    image.Tag = State.Player;
                     image.RotateFlip(player.GetRotationFlipType());
-                    return image;
-                default:
-                    return null;
+                    break;
             }
+
+            return image;
         }
 
         public State GetStateOfPosition(Tuple<int,int> position)
