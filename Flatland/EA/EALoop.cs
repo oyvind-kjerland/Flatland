@@ -47,7 +47,7 @@ namespace Flatland.EA
 
             AdultPopulation = new List<Individual>();
             ParentList = new List<Individual>();
-
+            max = int.MinValue;
         }
 
         public void Iterate()
