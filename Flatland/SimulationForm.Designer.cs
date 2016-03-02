@@ -45,6 +45,7 @@
             this.rightSensorLabel = new System.Windows.Forms.Label();
             this.leftSensorLabel = new System.Windows.Forms.Label();
             this.buttonStart = new System.Windows.Forms.Button();
+            this.newBoardButton = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -211,11 +212,22 @@
             this.buttonStart.UseVisualStyleBackColor = true;
             this.buttonStart.Click += new System.EventHandler(this.buttonStart_Click);
             // 
+            // newBoardButton
+            // 
+            this.newBoardButton.Location = new System.Drawing.Point(644, 391);
+            this.newBoardButton.Name = "newBoardButton";
+            this.newBoardButton.Size = new System.Drawing.Size(75, 23);
+            this.newBoardButton.TabIndex = 19;
+            this.newBoardButton.Text = "New Board";
+            this.newBoardButton.UseVisualStyleBackColor = true;
+            this.newBoardButton.Click += new System.EventHandler(this.newBoardButton_Click);
+            // 
             // SimulationForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(820, 561);
+            this.Controls.Add(this.newBoardButton);
             this.Controls.Add(this.buttonStart);
             this.Controls.Add(this.leftSensorLabel);
             this.Controls.Add(this.rightSensorLabel);
@@ -257,5 +269,6 @@
         private System.Windows.Forms.Label rightSensorLabel;
         private System.Windows.Forms.Label leftSensorLabel;
         private System.Windows.Forms.Button buttonStart;
+        private System.Windows.Forms.Button newBoardButton;
     }
 }

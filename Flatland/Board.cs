@@ -14,6 +14,8 @@ namespace Flatland
 
         public State[,] board { get; set; }
         public State[,] initialBoard { get; }
+        public float[] FPD { get; }
+        public int[] dimensions { get; }
         public Player player;
 
 
@@ -24,6 +26,8 @@ namespace Flatland
         /// <param name="dimensions">Board dimensinos</param>
         public Board(float[] FPD, int[] dimensions)
         {
+            this.FPD = FPD;
+            this.dimensions = dimensions;
             board =  new State[dimensions[0], dimensions[1]];
 
             for (int i = 0; i < board.GetLength(0); i++)
@@ -40,6 +44,13 @@ namespace Flatland
             PlaceRandomPlayer();
             initialBoard = (State[,])board.Clone();
 
+        }
+
+        public Board GetRandomizedBoard()
+        {
+            Board newBoard = new Board(this.FPD, this.dimensions);
+            newBoard.player.ann = player.ann;
+            return newBoard;
         }
 
         public void ResetBoard()

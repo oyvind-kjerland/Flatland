@@ -161,7 +161,7 @@ namespace Flatland
         private void buttonStart_Click(object sender, EventArgs e)
         {
 
-
+            board.ResetBoard();
             ANNWeightPhenotype phenotype = (ANNWeightPhenotype)bestIndividual.Phenotype;
             board.player.ann.SetWeights(phenotype.Weights);
 
@@ -177,6 +177,12 @@ namespace Flatland
 
             board.ResetBoard();
             SimulateVisualization(moves, board);
+        }
+
+        private void newBoardButton_Click(object sender, EventArgs e)
+        {
+            board = board.GetRandomizedBoard();
+            UpdateAllGUI(board);
         }
     }
 }

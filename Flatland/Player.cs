@@ -38,6 +38,7 @@ namespace Flatland
             this.foodScore = 0;
             this.poisonScore = 0;
             this.position = initialPosition;
+            UpdateSensors(position);
             this.facingDirection = FacingDirection.SOUTH;
         }
 
