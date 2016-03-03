@@ -48,6 +48,9 @@ namespace Flatland
         /// <param name="dir">Direction to move</param>
         public void Move(MovementDirection dir)
         {
+            // Do nothing and die
+            if (dir == MovementDirection.NONE) return;
+
             FacingDirection nextFacingDirection = GetNewDirection(dir, facingDirection);
             Tuple<int, int> nextPos = board.GetNextPosition(nextFacingDirection, position);
 

@@ -64,6 +64,11 @@ namespace Flatland
             comboBoxParentSelector.SelectedIndex = TOURNAMENT_INDEX;
 
 
+
+            Tuple<int, int> t = new Tuple<int, int>(1,2);
+            Tuple<int, int> t2 = t;
+            
+
         }
 
 
@@ -85,9 +90,12 @@ namespace Flatland
                 int[] numNodesPerLayer = listBoxANN.Items.OfType<int>().ToArray();
 
                 // Setup the actication function (currently hardcoded)
-                ActivationFunction activationFunction = new SigmoidActivation();
+                //ActivationFunction activationFunction = new SigmoidActivation();
+                ActivationFunction activationFunction = new HyperbolicTangentActivation();
+                
+                bool useBiasNode = checkBoxBiasNode.Checked;
 
-                ANN ann = new ANN(numSensorNodes, numMotorNodes, numHiddenLayers, numNodesPerLayer, activationFunction);
+                ANN ann = new ANN(numSensorNodes, numMotorNodes, numHiddenLayers, numNodesPerLayer, activationFunction, useBiasNode);
 
                 int numWeights = ann.GetNumberOfWeights();
 
@@ -96,7 +104,7 @@ namespace Flatland
                 eaLoop.ChildCount = childCount;
 
                 // Setup genotype (TODO Remove hardcoding)
-                int numBitsPerWeight = 8;
+                int numBitsPerWeight = (int)numericBitsPerWeight.Value;
                 int numBits = numBitsPerWeight * numWeights;
                 eaLoop.Genotype = new BinaryGenotype(numBits);
 
@@ -110,8 +118,8 @@ namespace Flatland
                 // Setup fitness evaluator
                 FlatlandFitnessEvaluator evaluator = new FlatlandFitnessEvaluator();
                 evaluator.ann = ann;
-                evaluator.changeBoardBetweenGenerations = false;
-                evaluator.numBoards = 1;
+                evaluator.changeBoardBetweenGenerations = checkBoxDynamic.Checked;
+                evaluator.numBoards = (int)numericNumBoards.Value;
                 evaluator.dimensions = new int[] { 10, 10 };
                 evaluator.FPD = new float[] { 0.33f, 0.33f };
                 evaluator.timeSteps = 60;
@@ -353,7 +361,10 @@ namespace Flatland
             Debug.WriteLine("max: " + max.ToString());
             Debug.WriteLine("average: " + average.ToString());
             Debug.WriteLine("sd: " + sd.ToString());
-            Debug.WriteLine("best: " + eaLoop.best.Phenotype.GetPhenotypeString());
+            if (eaLoop.best != null)
+            {
+                Debug.WriteLine("best: " + eaLoop.best.Phenotype.GetPhenotypeString());
+            }
             
         }
 

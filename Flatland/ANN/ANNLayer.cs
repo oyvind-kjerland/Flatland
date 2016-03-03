@@ -21,8 +21,16 @@ namespace Flatland
         public int numNodes { get; private set; }
         public int numOutputs { get; private set; }
 
-        public ANNLayer(int numNodes, int numOutputs)
+        // Bias node settings
+        private bool useBiasNode;
+
+        public ANNLayer(int numNodes, int numOutputs, bool useBiasNode)
         {
+
+            // Add an extra node if using bias node
+            if (useBiasNode) numNodes++;
+            this.useBiasNode = useBiasNode;
+
             this.numNodes = numNodes;
             this.numOutputs = numOutputs;
 
@@ -37,12 +45,20 @@ namespace Flatland
             // Clear the output
             for (int i = 0; i < numOutputs; i++) output[i] = 0;
 
+            double activation;
+
             // Iterate over each node in the layer
             for (int i=0; i<numNodes; i++)
             {
 
                 // Get the activation
-                double activation = ActivationFunction.Activate(input[i]);
+                if (useBiasNode && i==numNodes-1)
+                {
+                    activation = 1;
+                } else
+                {
+                    activation = ActivationFunction.Activate(input[i]);
+                }
 
                 // Add the contribution to the outputs
                 for (int j=0; j<numOutputs; j++)

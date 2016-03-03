@@ -21,7 +21,9 @@ namespace Flatland
         private int numLayers;
         private int[] numNodesPerLayer;
 
-        public ANN(int numInputNodes, int numOutputNodes, int numLayers, int[] numNodesPerLayer, ActivationFunction activationFunction)
+
+        
+        public ANN(int numInputNodes, int numOutputNodes, int numLayers, int[] numNodesPerLayer, ActivationFunction activationFunction, bool useBiasNode)
         {
 
             this.numInputNodes = numInputNodes;
@@ -33,22 +35,33 @@ namespace Flatland
             layerList = new List<ANNLayer>();
 
             // Add the Sensor layer
-            ANNLayer sensorLayer = new ANNLayer(numInputNodes, numNodesPerLayer[0]);
+            ANNLayer sensorLayer;
+            if (numLayers > 0)
+            {
+                sensorLayer = new ANNLayer(numInputNodes, numNodesPerLayer[0], useBiasNode);
+            } else
+            {
+                sensorLayer = new ANNLayer(numInputNodes, numOutputNodes, useBiasNode);
+            }
+
             sensorLayer.ActivationFunction = new IdentityActivation();
             layerList.Add(sensorLayer);
 
             // Add the hidden layers
-            for (int i=0; i<numLayers-1; i++)
+            if (numLayers > 0)
             {
-                ANNLayer hiddenLayer = new ANNLayer(numNodesPerLayer[i], numNodesPerLayer[i+1]);
-                hiddenLayer.ActivationFunction = activationFunction;
-                layerList.Add(hiddenLayer);
-            }
+                for (int i=0; i<numLayers-1; i++)
+                {
+                    ANNLayer hiddenLayer = new ANNLayer(numNodesPerLayer[i], numNodesPerLayer[i+1], useBiasNode);
+                    hiddenLayer.ActivationFunction = activationFunction;
+                    layerList.Add(hiddenLayer);
+                }
 
-            // Add the last hidden layer, which will give the outputs to the motor layer
-            ANNLayer lastLayer = new ANNLayer(numNodesPerLayer[numLayers-1], numOutputNodes);
-            lastLayer.ActivationFunction = activationFunction;
-            layerList.Add(lastLayer);
+                // Add the last hidden layer, which will give the outputs to the motor layer
+                ANNLayer lastLayer = new ANNLayer(numNodesPerLayer[numLayers-1], numOutputNodes, false);
+                lastLayer.ActivationFunction = activationFunction;
+                layerList.Add(lastLayer);
+            }
         }
 
 

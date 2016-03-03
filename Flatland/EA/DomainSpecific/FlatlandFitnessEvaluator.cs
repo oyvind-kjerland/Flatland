@@ -9,11 +9,11 @@ namespace Flatland.EA.DomainSpecific
     class FlatlandFitnessEvaluator : FitnessEvaluator
     {
         private double foodWeight = 1;
-        private double poisonWeight = -1.5;
+        private double poisonWeight = -3;
         public ANN ann;
         public bool changeBoardBetweenGenerations;
         public List<Board> boards;
-        public int numBoards = 5;
+        public int numBoards;
         public float[] FPD;
         public int[] dimensions;
         public int timeSteps;

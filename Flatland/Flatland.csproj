@@ -48,12 +48,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ANN\Activation Functions\ActivationFunction.cs" />
     <Compile Include="ANN\Activation Functions\BinaryStepActivation.cs" />
     <Compile Include="ANN\Activation Functions\HyperbolicTangentActivation.cs" />
+    <Compile Include="ANN\Activation Functions\IdentityActivation.cs" />
     <Compile Include="ANN\Activation Functions\RLUActivation.cs" />
+    <Compile Include="ANN\Activation Functions\SigmoidActivation.cs" />
     <Compile Include="Board.cs" />
     <Compile Include="EA\AdultSelector.cs" />
-    <Compile Include="ANN\Activation Functions\ActivationFunction.cs" />
     <Compile Include="ANN\ANN.cs" />
     <Compile Include="ANN\ANNLayer.cs" />
     <Compile Include="EA\DomainSpecific\ANNWeightPhenotype.cs" />
@@ -84,7 +86,6 @@
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
-    <Compile Include="ANN\Activation Functions\IdentityActivation.cs" />
     <Compile Include="EA\GeneticOperator.cs" />
     <Compile Include="EA\Genotype.cs" />
     <Compile Include="EA\Individual.cs" />
@@ -94,7 +95,6 @@
     <Compile Include="Player.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ANN\Activation Functions\SigmoidActivation.cs" />
     <Compile Include="SimulationForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -113,7 +113,6 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
-      <DesignTime>True</DesignTime>
     </Compile>
     <EmbeddedResource Include="SimulationForm.resx">
       <DependentUpon>SimulationForm.cs</DependentUpon>
@@ -132,7 +131,6 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Resources\empty.jpg" />
     <Content Include="Resources\player.png" />
     <Content Include="Resources\poison.png" />
     <Content Include="Resources\rice.jpg" />

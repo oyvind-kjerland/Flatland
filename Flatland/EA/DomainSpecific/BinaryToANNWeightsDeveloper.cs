@@ -33,7 +33,7 @@ namespace Flatland.EA.DomainSpecific
                 if (i % NumBitsPerWeight == NumBitsPerWeight - 1)
                 {
                     // Calculating a weight between 0 and 1
-                    weights[weightIndex] = (double)weight / max;
+                    weights[weightIndex] = (double)(weight - max/2) / max;
                     weight = 0;
                     weightIndex++;
                 }
