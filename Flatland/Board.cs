@@ -74,10 +74,16 @@ namespace Flatland
 
                     if (probability < foodRate)
                         board[i, j] = State.Food;
-                    else if (probability < foodRate + poisonRate)
-                        board[i, j] = State.Poison;
+                    else
+                    {
+                        probability = r.NextDouble();
+                        if (probability < poisonRate)
+                            board[i, j] = State.Poison;
+                    }
                 }
             }
+
+            
         }
 
         /// <summary>
