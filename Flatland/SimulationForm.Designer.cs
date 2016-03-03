@@ -247,6 +247,11 @@
             this.delayNumericUpDown.Name = "delayNumericUpDown";
             this.delayNumericUpDown.Size = new System.Drawing.Size(120, 20);
             this.delayNumericUpDown.TabIndex = 21;
+            this.delayNumericUpDown.Value = new decimal(new int[] {
+            50,
+            0,
+            0,
+            0});
             // 
             // stopButton
             // 
