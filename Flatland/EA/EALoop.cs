@@ -23,7 +23,7 @@ namespace Flatland.EA
         public int generation;
         public float average;
         public float max;
-        public Individual best;
+        public Individual best, prevBest;
         public float goal;
         public int ChildCount { get; set; }
         public bool Elitism { get; set; }
@@ -47,7 +47,7 @@ namespace Flatland.EA
 
             AdultPopulation = new List<Individual>();
             ParentList = new List<Individual>();
-            max = int.MinValue;
+            max = float.MinValue;
         }
 
         public void Iterate()
@@ -64,10 +64,18 @@ namespace Flatland.EA
             average = 0;
 
             // If no elitism, check the best of the generation
-            if (!Elitism)
+            //if (!Elitism)
+            //{
+            max = float.MinValue;
+            //}
+
+            // Put in the best
+            if (Elitism && prevBest != null)
             {
-                max = 0;
+                ChildPopulation.Add(prevBest);
             }
+
+
 
             FitnessEvaluator.NextGeneration();
 
@@ -87,12 +95,6 @@ namespace Flatland.EA
 
             // Perform adult selection
             AdultSelector.Select(ChildPopulation, AdultPopulation);
-
-            // Put in the best
-            if (Elitism)
-            {
-                AdultPopulation.Add(best);
-            }
 
             // Perform parent selection
             ParentSelector.Select(ParentList, AdultPopulation);
@@ -141,6 +143,8 @@ namespace Flatland.EA
                 }
             }
 
+            // Set the best individual for the next generation
+            prevBest = best;
 
             // Update generation
             generation++;

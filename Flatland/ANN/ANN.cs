@@ -58,7 +58,7 @@ namespace Flatland
                 }
 
                 // Add the last hidden layer, which will give the outputs to the motor layer
-                ANNLayer lastLayer = new ANNLayer(numNodesPerLayer[numLayers-1], numOutputNodes, false);
+                ANNLayer lastLayer = new ANNLayer(numNodesPerLayer[numLayers-1], numOutputNodes, useBiasNode);
                 lastLayer.ActivationFunction = activationFunction;
                 layerList.Add(lastLayer);
             }

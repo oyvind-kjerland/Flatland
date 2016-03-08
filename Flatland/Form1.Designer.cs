@@ -28,8 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea2 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
-            System.Windows.Forms.DataVisualization.Charting.Legend legend2 = new System.Windows.Forms.DataVisualization.Charting.Legend();
+            System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
+            System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
             this.startButton = new System.Windows.Forms.Button();
             this.comboBoxProblem = new System.Windows.Forms.ComboBox();
             this.labelProblem = new System.Windows.Forms.Label();
@@ -174,14 +174,16 @@
             // 
             // chart1
             // 
-            chartArea2.AxisX.Maximum = 100D;
-            chartArea2.AxisX.Minimum = 0D;
-            chartArea2.AxisX.Title = "Generation";
-            chartArea2.AxisY.Title = "Fitness";
-            chartArea2.Name = "ChartArea1";
-            this.chart1.ChartAreas.Add(chartArea2);
-            legend2.Name = "Legend1";
-            this.chart1.Legends.Add(legend2);
+            chartArea1.AxisX.Maximum = 100D;
+            chartArea1.AxisX.Minimum = 0D;
+            chartArea1.AxisX.Title = "Generation";
+            chartArea1.AxisY.Title = "Fitness";
+            chartArea1.CursorX.IsUserSelectionEnabled = true;
+            chartArea1.CursorY.IsUserSelectionEnabled = true;
+            chartArea1.Name = "ChartArea1";
+            this.chart1.ChartAreas.Add(chartArea1);
+            legend1.Name = "Legend1";
+            this.chart1.Legends.Add(legend1);
             this.chart1.Location = new System.Drawing.Point(12, 295);
             this.chart1.Name = "chart1";
             this.chart1.Size = new System.Drawing.Size(871, 268);

@@ -23,7 +23,7 @@ namespace Flatland
         public int foodScore { get; set; }
         public int poisonScore { get; set; }
         public ANN ann { get; set; }
-        public double threshold { get; set; }
+        public double threshold { get; set; } = double.MinValue;
 
         public Player(Board board, Tuple<int, int> position)
         {
